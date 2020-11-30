@@ -4,6 +4,7 @@
 	Recommended trigger: Regex trigger with trigger `<@!?\d+>`
 */}}
 {{ $id := reFind `\d+` .Cmd | toInt64 }}
+{{ if ne .User.ID $id }}
 {{ with (dbGet $id "afk") }}
 	{{ $user := userArg .UserID }}
 	{{ $eta := "" }}
@@ -15,4 +16,4 @@
 		"footer" (sdict "text" "Away since")
 		"timestamp" .UpdatedAt
 	) }}
-{{ end }}
+{{ end }}{{ end }}
