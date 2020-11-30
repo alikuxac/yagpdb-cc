@@ -4,7 +4,7 @@
     Recommend: Regex trigger with trigger `.*`.
 */}}
 
-{{ if not (reFind `\A-afk` .Cmd) }}
+{{ if not (reFind `\A(-|<@!?204255221017214977>\s*)afk` .Cmd) }}
 {{ if dbGet .User.ID "afk" }}
 {{ print "Welcome back. " .User.Mention "\nRemoved your AFK's status" }}
 {{ dbDel .User.ID "afk" }}
